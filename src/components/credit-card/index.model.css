@@ -1,3 +1,13 @@
+img {
+  width: 45px;
+}
+
+label {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14pt;
+}
+
 .credit-card {
   width: 333px;
   height: 205px;
