@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CreditCard from '../credit-card';
 import MaskInput from 'react-maskinput';
 import { FORM_CARD_FIELDS } from '../../utils/constants/form';
@@ -10,6 +10,10 @@ export default () => {
   const [expDate, setExpDate] = useState();
   const [cardName, setCardName] = useState();
   const [cvv, setCvv] = useState();
+
+  useEffect(() => {
+    if (cardNumber.indexOf('4') === 0)
+  });
 
   const handleChange = e => {
     switch (e.target.getAttribute('name')) {
@@ -64,12 +68,12 @@ export default () => {
             </div>
             <div className='form-row mt-3'>
               <div className='col-md-12'>
-                <input 
+                <input
                   name={FORM_CARD_FIELDS.CARD_NAME}
                   onChange={handleChange}
                   className='form-control'
                   placeholder='Card Name'
-                  maxLength="21"
+                  maxLength='21'
                 />
               </div>
             </div>

@@ -3,7 +3,6 @@ import './index.model.css';
 
 import Logo from '../../assets/images/png/efigie.png';
 import Chip from '../../assets/images/png/card-chip.png';
-import MasterCard from '../../assets/images/png/logo-mastercard.png';
 
 export default props => (
   <div className='credit-card shadow rounded p-3'>
@@ -30,7 +29,7 @@ export default props => (
     </div>
     <div className='row d-flex justify-content-between'>
       <div className='col-md-9'>
-        <div className="mt-075">
+        <div className='mt-075'>
           <label>Card name:</label>
         </div>
         <div className=''>
@@ -38,7 +37,7 @@ export default props => (
         </div>
       </div>
       <div className='col-md-3 text-right'>
-        <img src={MasterCard} alt='card flag logo' />
+        <img src={props.img} alt='' />
       </div>
     </div>
   </div>
