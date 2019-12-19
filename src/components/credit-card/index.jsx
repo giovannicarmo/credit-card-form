@@ -12,10 +12,10 @@ export default props => (
       className='mx-auto d-block'
       alt='generic credit card logo'
     />
-    <img src={Chip} className='mt-1' alt='generic credit card chip' />
+    <img src={Chip} alt='generic credit card chip' />
     <div className='row d-flex justify-content-between'>
-      <div className='col-md-8 mt-3'>
-        <span>{props.number || "0000 0000 0000 0000"}</span>
+      <div className='col-md-8 mt-2'>
+        <span>{props.number}</span>
       </div>
       <div className='col-md-4'>
         <div className='d-flex align-items-start flex-column'>
@@ -23,21 +23,21 @@ export default props => (
             <label>Exp. date:</label>
           </div>
           <div className='mt-075'>
-            <span className='card-date'>{props.date || "00/0000"}</span>
+            <span className='card-date'>{props.date || '00/00'}</span>
           </div>
         </div>
       </div>
     </div>
     <div className='row d-flex justify-content-between'>
-      <div className='col-md-6'>
-        <div>
+      <div className='col-md-9'>
+        <div className="mt-075">
           <label>Card name:</label>
         </div>
-        <div className='mt-075'>
-<span className='text-uppercase'>{props.name || "your name here"}</span>
+        <div className=''>
+          <span className='text-uppercase'>{props.name}</span>
         </div>
       </div>
-      <div className='col-md-6 text-right'>
+      <div className='col-md-3 text-right'>
         <img src={MasterCard} alt='card flag logo' />
       </div>
     </div>

@@ -15,7 +15,7 @@ span.text-uppercase {
 
 label {
   color: #fff;
-  font-size: 8pt;
+  font-size: 7.5pt;
 }
 
 .credit-card {
@@ -34,4 +34,8 @@ label {
 
 .card-date {
   font-size: 10.5pt;
+}
+
+#rotate-y {
+  transform: rotateY(180deg);
 }
