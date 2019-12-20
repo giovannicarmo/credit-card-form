@@ -20,35 +20,30 @@ export default () => {
   const [rotate, setRotate] = useState(false);
 
   useEffect(() => {
-    if (
-      (cardNumber.indexOf('34') === 0 || cardNumber.indexOf('37') === 0) &&
-      cardFlag !== Amex
-    ) {
+    if (cardNumber.indexOf('34') === 0 || cardNumber.indexOf('37') === 0) {
       setCardFlag(Amex);
     } else if (
-      (cardNumber.indexOf('36') === 0 ||
-        cardNumber.indexOf('38') === 0 ||
-        cardNumber.indexOf('300') === 0 ||
-        cardNumber.indexOf('301') === 0 ||
-        cardNumber.indexOf('302') === 0 ||
-        cardNumber.indexOf('303') === 0 ||
-        cardNumber.indexOf('304') === 0 ||
-        cardNumber.indexOf('305') === 0) &&
-      cardFlag !== DinersClub
+      cardNumber.indexOf('36') === 0 ||
+      cardNumber.indexOf('38') === 0 ||
+      cardNumber.indexOf('300') === 0 ||
+      cardNumber.indexOf('301') === 0 ||
+      cardNumber.indexOf('302') === 0 ||
+      cardNumber.indexOf('303') === 0 ||
+      cardNumber.indexOf('304') === 0 ||
+      cardNumber.indexOf('305') === 0
     ) {
       setCardFlag(DinersClub);
-    } else if (cardNumber.indexOf('6062') === 0 && cardFlag !== Hipercard) {
+    } else if (cardNumber.indexOf('6062') === 0) {
       setCardFlag(Hipercard);
     } else if (
-      (cardNumber.indexOf('51') === 0 ||
-        cardNumber.indexOf('52') === 0 ||
-        cardNumber.indexOf('53') === 0 ||
-        cardNumber.indexOf('54') === 0 ||
-        cardNumber.indexOf('55') === 0) &&
-      cardFlag !== Mastercard
+      cardNumber.indexOf('51') === 0 ||
+      cardNumber.indexOf('52') === 0 ||
+      cardNumber.indexOf('53') === 0 ||
+      cardNumber.indexOf('54') === 0 ||
+      cardNumber.indexOf('55') === 0
     ) {
       setCardFlag(Mastercard);
-    } else if (cardNumber.indexOf('4') === 0 && cardFlag !== Visa) {
+    } else if (cardNumber.indexOf('4') === 0) {
       setCardFlag(Visa);
     } else {
       setCardFlag('');
