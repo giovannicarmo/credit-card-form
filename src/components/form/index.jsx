@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import CreditCardFront from '../credit-card-front';
 import CreditCardBack from '../credit-card-back';
 import MaskInput from 'react-maskinput';
-import { FORM_CARD_FIELDS } from '../../utils/constants/form';
-import Amex from '../../assets/images/png/logo-amex.png';
-import DinersClub from '../../assets/images/png/logo-dinersclub.png';
-import Hipercard from '../../assets/images/png/logo-hipercard.png';
-import Mastercard from '../../assets/images/png/logo-mastercard.png';
-import Visa from '../../assets/images/png/logo-visa.png';
+import { FORM_CARD_FIELDS, CREDIT_CARD } from '../../utils/constants/form';
+import amex from '../../assets/images/png/logo-amex.png';
+import dinersClub from '../../assets/images/png/logo-dinersclub.png';
+import hipercard from '../../assets/images/png/logo-hipercard.png';
+import mastercard from '../../assets/images/png/logo-mastercard.png';
+import visa from '../../assets/images/png/logo-visa.png';
 import './index.model.css';
 
 export default () => {
@@ -20,35 +20,21 @@ export default () => {
   const [rotate, setRotate] = useState(false);
 
   useEffect(() => {
-    if (cardNumber.indexOf('34') === 0 || cardNumber.indexOf('37') === 0) {
-      setCardFlag(Amex);
-    } else if (
-      cardNumber.indexOf('36') === 0 ||
-      cardNumber.indexOf('38') === 0 ||
-      cardNumber.indexOf('300') === 0 ||
-      cardNumber.indexOf('301') === 0 ||
-      cardNumber.indexOf('302') === 0 ||
-      cardNumber.indexOf('303') === 0 ||
-      cardNumber.indexOf('304') === 0 ||
-      cardNumber.indexOf('305') === 0
-    ) {
-      setCardFlag(DinersClub);
-    } else if (cardNumber.indexOf('6062') === 0) {
-      setCardFlag(Hipercard);
-    } else if (
-      cardNumber.indexOf('51') === 0 ||
-      cardNumber.indexOf('52') === 0 ||
-      cardNumber.indexOf('53') === 0 ||
-      cardNumber.indexOf('54') === 0 ||
-      cardNumber.indexOf('55') === 0
-    ) {
-      setCardFlag(Mastercard);
-    } else if (cardNumber.indexOf('4') === 0) {
-      setCardFlag(Visa);
-    } else {
-      setCardFlag('');
-    }
+    observeCardNumber();
+    return () => setCardFlag('');
   }, [cardNumber]);
+
+  const observeCardNumber = () => {
+    const flagImage = Object.entries(CREDIT_CARD)
+      .filter(([_, { prexfix }]) => {
+        return prexfix
+          .map(required => new RegExp(`^${required}`, 'ig').test(cardNumber))
+          .includes(true);
+      })
+      .slice(0, 1)
+      .reduce((findedFlag, [_, { flag }]) => findedFlag || flag, '');
+    setCardFlag(flagImage);
+  };
 
   const handleChange = e => {
     switch (e.target.getAttribute('name')) {
