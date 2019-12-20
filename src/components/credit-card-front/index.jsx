@@ -37,7 +37,7 @@ export default props => (
         </div>
       </div>
       <div className='col-md-3 text-right'>
-        <img src={props.img} alt='' />
+        <img src={props.flag} alt='' />
       </div>
     </div>
   </div>
