@@ -3,11 +3,6 @@ import CreditCardFront from '../credit-card-front';
 import CreditCardBack from '../credit-card-back';
 import MaskInput from 'react-maskinput';
 import { FORM_CARD_FIELDS, CREDIT_CARD } from '../../utils/constants/form';
-import amex from '../../assets/images/png/logo-amex.png';
-import dinersClub from '../../assets/images/png/logo-dinersclub.png';
-import hipercard from '../../assets/images/png/logo-hipercard.png';
-import mastercard from '../../assets/images/png/logo-mastercard.png';
-import visa from '../../assets/images/png/logo-visa.png';
 import './index.model.css';
 
 export default () => {
