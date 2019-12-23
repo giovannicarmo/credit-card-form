@@ -26,11 +26,11 @@ export default () => {
 
   const observeCardNumber = () => {
     const flagImage = Object.entries(CREDIT_CARD)
-      .filter(([_, { prexfix }]) => {
-        return prexfix
+      .filter(([_, { prefix }]) =>
+        prefix
           .map(required => new RegExp(`^${required}`, 'ig').test(cardNumber))
-          .includes(true);
-      })
+          .includes(true)
+      )
       .slice(0, 1)
       .reduce((findedFlag, [_, { flag }]) => findedFlag || flag, '');
     setCardFlag(flagImage);
