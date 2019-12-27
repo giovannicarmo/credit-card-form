@@ -35,16 +35,9 @@ export default () => {
     switch (e.target.getAttribute('name')) {
       case FORM_CARD_FIELDS.CARD_NUMBER:
         if (
-          e.target.value.indexOf('34') === 0 ||
-          e.target.value.indexOf('37') === 0 ||
-          e.target.value.indexOf('36') === 0 ||
-          e.target.value.indexOf('38') === 0 ||
-          e.target.value.indexOf('300') === 0 ||
-          e.target.value.indexOf('301') === 0 ||
-          e.target.value.indexOf('302') === 0 ||
-          e.target.value.indexOf('303') === 0 ||
-          e.target.value.indexOf('304') === 0 ||
-          e.target.value.indexOf('305') === 0
+          CREDIT_CARD.AMEX['prefix']
+            .concat(CREDIT_CARD.DINNERS_CLUB['prefix'])
+            .find(pre => e.target.value.startsWith(pre))
         ) {
           setCardNumberMask('0000-000000-00000');
         } else {
