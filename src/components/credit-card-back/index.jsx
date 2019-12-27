@@ -6,7 +6,7 @@ export default props => (
     <div className='m-3 p-1 w-50 d-flex justify-content-end bg-white'>
       {props.cvv}
     </div>
-    <div class='d-flex align-items-end flex-column bd-highlight mt-4 p-3'>
+    <div className='d-flex align-items-end flex-column bd-highlight mt-4 p-3'>
       <img src={props.flag} alt='' />
     </div>
   </div>
