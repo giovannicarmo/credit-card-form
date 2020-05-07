@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.model.css';
 
 import Logo from '../../assets/images/png/efigie.png';
 import Chip from '../../assets/images/png/card-chip.png';

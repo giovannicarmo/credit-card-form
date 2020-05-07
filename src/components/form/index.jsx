@@ -2,61 +2,66 @@ import React, { useEffect, useState } from 'react';
 import CreditCardFront from '../credit-card-front';
 import CreditCardBack from '../credit-card-back';
 import MaskInput from 'react-maskinput';
-import { FORM_CARD_FIELDS, CREDIT_CARD } from '../../utils/constants/form';
-import './index.model.css';
+import {
+  FORM_CARD_FIELDS,
+  CREDIT_CARD_BRAND,
+} from '../../utils/constants/form';
 
 export default () => {
   const [cardNumberMask, setCardNumberMask] = useState('0000-0000-0000-0000');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expDate, setExpDate] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [cardCvv, setCardCvv] = useState('000');
-  const [cardFlag, setCardFlag] = useState('');
   const [rotate, setRotate] = useState(false);
+  const [card, setCard] = useState({ number: '', name: '', date: '', cvv: '' , flag: ''});
+  const [cardList, setCardList] = useState([]);
 
   useEffect(() => {
     observeCardNumber();
-    return () => setCardFlag('');
-  }, [cardNumber]);
+    return () => setCard({...card, flag: ''});
+  }, [card.number]);
 
   const observeCardNumber = () => {
-    const flagImage = Object.entries(CREDIT_CARD)
+    const flagImage = Object.entries(CREDIT_CARD_BRAND)
       .filter(([_, { prefix }]) =>
         prefix
-          .map(required => new RegExp(`^${required}`, 'ig').test(cardNumber))
+          .map((required) => new RegExp(`^${required}`, 'ig').test(card.number))
           .includes(true)
       )
       .slice(0, 1)
       .reduce((findedFlag, [_, { flag }]) => findedFlag || flag, '');
-    setCardFlag(flagImage);
+    setCard({...card, flag: flagImage});
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     switch (e.target.getAttribute('name')) {
       case FORM_CARD_FIELDS.CARD_NUMBER:
         if (
-          CREDIT_CARD.AMEX['prefix']
-            .concat(CREDIT_CARD.DINNERS_CLUB['prefix'])
-            .find(pre => e.target.value.startsWith(pre))
+          CREDIT_CARD_BRAND.AMEX['prefix']
+            .concat(CREDIT_CARD_BRAND.DINNERS_CLUB['prefix'])
+            .find((pre) => e.target.value.startsWith(pre))
         ) {
           setCardNumberMask('0000-000000-00000');
         } else {
           setCardNumberMask('0000-0000-0000-0000');
         }
-        setCardNumber(e.target.value.split('-').join(' '));
+        setCard({ ...card, number: e.target.value.split('-').join(' ') });
         break;
       case FORM_CARD_FIELDS.EXP_DATE:
-        setExpDate(e.target.value);
+        setCard({ ...card, date: e.target.value });
         break;
       case FORM_CARD_FIELDS.CARD_NAME:
-        setCardName(e.target.value);
+        setCard({ ...card, name: e.target.value });
         break;
       case FORM_CARD_FIELDS.CVV:
-        setCardCvv(e.target.value);
+        setCard({ ...card, cvv: e.target.value });
         break;
       default:
         return;
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCardList([...cardList, card]);
+    setCard({ number: '', name: '', date: '', cvv: '' , flag: ''})
   };
 
   return (
@@ -65,16 +70,16 @@ export default () => {
         <div className='card-img-top d-flex justify-content-center'>
           {!rotate && (
             <CreditCardFront
-              number={cardNumber}
-              date={expDate}
-              name={cardName}
-              flag={cardFlag}
+              number={card.number}
+              date={card.date}
+              name={card.name}
+              flag={card.flag}
             />
           )}
-          {rotate && <CreditCardBack cvv={cardCvv} flag={cardFlag} />}
+          {rotate && <CreditCardBack cvv={card.cvv} flag={card.flag} />}
         </div>
         <div className='cardBody p-3 pt-5 shadow rounded'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className='form-row'>
               <div className='col-md-12'>
                 <MaskInput
@@ -125,7 +130,6 @@ export default () => {
                 <button
                   type='submit'
                   className='btn btn-success btn-lg btn-block'
-                  disabled
                 >
                   Submit
                 </button>
