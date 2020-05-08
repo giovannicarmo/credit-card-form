@@ -2,7 +2,8 @@ export const FORM_CARD_FIELDS = {
   CARD_NUMBER: 'cardNumber',
   EXP_DATE: 'expDate',
   CARD_NAME: 'cardName',
-  CVV: 'cvv'
+  CVV: 'cvv',
+  FORM_NAME: 'newCardFORM'
 };
 
 export const CREDIT_CARD_BRAND = {
